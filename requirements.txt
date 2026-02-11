@@ -1,0 +1,21 @@
+#Core spark and Data Processing
+pyspark==3.5.0
+pandas==2.1.4
+numpy==1.26.2
+
+#Visualization
+matplotlib==3.8.2
+seaborn==0.13.0
+plotly==5.18.0
+
+#Jupyter Environment
+jupyter==1.0.0
+ipykernel==6.27.1
+notebook==7.0.6
+
+#Utilities
+python-dotenv==1.0.0
+tqdm==4.66.1
+
+
+
