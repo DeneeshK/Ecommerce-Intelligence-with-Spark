@@ -73,7 +73,7 @@ def load_dataset(spark: SparkSession, dataset_name: str, validate: bool = True )
         expected=EXPECTED_ROW_COUNTS[dataset_name]
 
         tolerance=0.1
-        diff_pct=abs(row_count= expected) / expected
+        diff_pct=abs(row_count - expected) / expected
 
         if diff_pct > tolerance:
             raise ValueError(
@@ -179,11 +179,10 @@ def display_dataframe_info(df: DataFrame, name: str, sample_rows: int = 5 ) -> N
 
     print(f"\n Null count per Column:")
     
-    null_counts=df.select([
-        count(when(col(c).isNull() | isnan(c), c)).alias(c)
+    null_counts = df.select([
+        count(when(col(c).isNull(), c)).alias(c) 
         for c in df.columns
     ])
-
     null_counts.show(truncate=False)
 
 

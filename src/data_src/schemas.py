@@ -16,7 +16,7 @@ from pyspark.sql.types import(
 
 customers_schema = StructType([
     StructField("customer_id", StringType(), False),
-    StructField("customer_uniqe_id", StringType(),False),
+    StructField("customer_unique_id", StringType(),False),
     StructField("customer_zip_code_prefix", StringType(), True) ,
     StructField("customer_city", StringType(), True),
     StructField("customer_state", StringType(), True),
@@ -195,18 +195,22 @@ SCHEMAS = {
 # FILE PATHS MAPPING
 # ==============================================================================
 
+import os
 
+# Get absolute path to project root
+# __file__ = this schemas.py file location
+# dirname twice = go up two levels (src/data/ -> src/ -> project_root/)
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 FILE_PATHS = {
-    "customers": "data/raw/olist_customers_dataset.csv",
-    "orders": "data/raw/olist_orders_dataset.csv",
-    "order_items": "data/raw/olist_order_items_dataset.csv",
-    "products": "data/raw/olist_products_dataset.csv",
-    "order_reviews": "data/raw/olist_order_reviews_dataset.csv",
-    "order_payments": "data/raw/olist_order_payments_dataset.csv",
-    "sellers": "data/raw/olist_sellers_dataset.csv",
-    "geolocation": "data/raw/olist_geolocation_dataset.csv",
+    "customers": os.path.join(PROJECT_ROOT, "data/raw/olist_customers_dataset.csv"),
+    "orders": os.path.join(PROJECT_ROOT, "data/raw/olist_orders_dataset.csv"),
+    "order_items": os.path.join(PROJECT_ROOT, "data/raw/olist_order_items_dataset.csv"),
+    "products": os.path.join(PROJECT_ROOT, "data/raw/olist_products_dataset.csv"),
+    "order_reviews": os.path.join(PROJECT_ROOT, "data/raw/olist_order_reviews_dataset.csv"),
+    "order_payments": os.path.join(PROJECT_ROOT, "data/raw/olist_order_payments_dataset.csv"),
+    "sellers": os.path.join(PROJECT_ROOT, "data/raw/olist_sellers_dataset.csv"),
+    "geolocation": os.path.join(PROJECT_ROOT, "data/raw/olist_geolocation_dataset.csv"),
 }
-
 
 # ==============================================================================
 # EXPECTED ROW COUNTS - Data Validation
