@@ -53,12 +53,23 @@ def load_dataset(spark: SparkSession, dataset_name: str, validate: bool = True )
 
     #load csv with spark
     try:
-        df=spark.read.csv(
+        #df=spark.read.csv(
+        #    filepath,
+        #    header=True,
+        #    schema=schema,
+        #    encoding='utf-8',
+        #    mode="FAILFAST"
+        #)
+
+        df = spark.read.csv(
             filepath,
             header=True,
             schema=schema,
             encoding='utf-8',
-            mode="FAILFAST"
+            mode='PERMISSIVE',        #  Handle malformed rows gracefully
+            multiLine=True,           #  Handle newlines in text fields
+            escape='"',               #  Handle quotes in strings
+            quote='"'                 #  Proper quote handling
         )
     except Exception as e:
         raise ValueError(
